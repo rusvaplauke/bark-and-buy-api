@@ -9,20 +9,20 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/APItemplate.WebAPI/APItemplate.WebAPI.csproj", "src/APItemplate.WebAPI/"]
+COPY ["src/BarkAndBuy.WebAPI/BarkAndBuy.WebAPI.csproj", "src/BarkAndBuy.WebAPI/"]
 COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
 COPY ["src/Application/Application.csproj", "src/Application/"]
 COPY ["src/Domain/Domain.csproj", "src/Domain/"]
-RUN dotnet restore "./src/APItemplate.WebAPI/./APItemplate.WebAPI.csproj"
+RUN dotnet restore "./src/BarkAndBuy.WebAPI/./BarkAndBuy.WebAPI.csproj"
 COPY . .
-WORKDIR "/src/src/APItemplate.WebAPI"
-RUN dotnet build "./APItemplate.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/BarkAndBuy.WebAPI"
+RUN dotnet build "./BarkAndBuy.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./APItemplate.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./BarkAndBuy.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "APItemplate.WebAPI.dll"]
+ENTRYPOINT ["dotnet", "BarkAndBuy.WebAPI.dll"]

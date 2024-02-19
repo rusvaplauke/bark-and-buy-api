@@ -1,11 +1,11 @@
 
-using APItemplate.WebAPI.Middlewares;
+using BarkAndBuy.WebAPI.Middlewares;
 using Application;
 using Infrastructure;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace APItemplate.WebAPI
+namespace BarkAndBuy.WebAPI
 {
     public class Program
     {

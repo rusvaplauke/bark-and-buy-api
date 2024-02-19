@@ -1,4 +1,4 @@
-namespace APItemplate.WebAPI
+namespace BarkAndBuy.WebAPI
 {
     public class WeatherForecast
     {

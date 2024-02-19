@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace APItemplate.WebAPI.Controllers
+namespace BarkAndBuy.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

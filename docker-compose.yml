@@ -1,11 +1,11 @@
 version: '3.4'
 
 services:
-  apitemplate.webapi:
-    image: ${DOCKER_REGISTRY-}apitemplatewebapi
+  barkandbuy.webapi:
+    image: ${DOCKER_REGISTRY-}barkandbuywebapi
     build:
       context: .
-      dockerfile: src/APItemplate.WebAPI/Dockerfile
+      dockerfile: src/BarkAndBuy.WebAPI/Dockerfile
     ports: 
       - "8080:8080"
       - "8081:8081"

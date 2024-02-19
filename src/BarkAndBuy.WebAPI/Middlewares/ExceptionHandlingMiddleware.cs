@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace APItemplate.WebAPI.Middlewares;
+namespace BarkAndBuy.WebAPI.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {

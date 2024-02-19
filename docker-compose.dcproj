@@ -4,10 +4,10 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>bee0e825-c04a-4810-91b0-fd295ebd5695</ProjectGuid>
+    <ProjectGuid>7c0a3229-b253-4b96-81d4-a55ef7aa1b14</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>apitemplate.webapi</DockerServiceName>
+    <DockerServiceName>barkandbuy.webapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
