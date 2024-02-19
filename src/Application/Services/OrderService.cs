@@ -42,7 +42,7 @@ public class OrderService
 
     public async Task<Order> DeliverAsync(int id)
     {
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = DeliveredStatus }); 
+        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = DeliveredStatus });
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
@@ -52,7 +52,7 @@ public class OrderService
 
     public async Task<Order> CompleteAsync(int id)
     {
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = CompletedStatus }); 
+        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = CompletedStatus });
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
