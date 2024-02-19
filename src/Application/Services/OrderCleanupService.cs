@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Domain.Exceptions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -32,12 +33,12 @@ public class OrderCleanupService : BackgroundService
                 using (var scope = _orderServiceScopeFactory.CreateScope())
                 {
                     var scopedService = scope.ServiceProvider.GetRequiredService<OrderService>();
-                    await scopedService.CleanUpExpired();
+                    await scopedService.CleanUpExpiredAsync();
                 }
             }
             catch (Exception ex)
             {
-                await Console.Out.WriteLineAsync(ex.Message);
+                throw new CleanupServiceException(ex.Message);
             }
         }
     }

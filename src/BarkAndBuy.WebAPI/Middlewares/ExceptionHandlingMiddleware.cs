@@ -36,9 +36,11 @@ public class ExceptionHandlingMiddleware
             response.StatusCode = ex switch
             {
                 UserNotFoundException => (int)HttpStatusCode.NotFound,
+                OrderNotFoundException => (int)HttpStatusCode.NotFound,
                 ErrorCreatingOrderException => (int)HttpStatusCode.InternalServerError,
                 SellerNotFoundException => (int)HttpStatusCode.NotFound,
-                _ => (int)HttpStatusCode.InternalServerError
+                CleanupServiceException => (int)HttpStatusCode.InternalServerError,
+               _ => (int)HttpStatusCode.InternalServerError
             };
 
             await response.WriteAsync(JsonSerializer.Serialize(new { message = ex?.Message }));

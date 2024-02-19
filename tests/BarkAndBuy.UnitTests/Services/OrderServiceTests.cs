@@ -1,5 +1,4 @@
 ﻿using Application.Services;
-using AutoFixture;
 using AutoFixture.Xunit2;
 using Domain.Dtos;
 using Domain.Entities;
@@ -12,7 +11,6 @@ namespace BarkAndBuy.UnitTests.Services;
 
 public class OrderServiceTests
 {
-    private readonly Fixture _fixture;
     private readonly Mock<ISellerRepository> _sellerRepositoryMock;
     private readonly Mock<IStatusRepository> _statusRepositoryMock;
     private readonly Mock<IOrderRepository> _orderRepositoryMock;
@@ -21,7 +19,6 @@ public class OrderServiceTests
 
     public OrderServiceTests()
     {
-        _fixture = new Fixture();
         _sellerRepositoryMock = new Mock<ISellerRepository>();
         _statusRepositoryMock = new Mock<IStatusRepository>();
         _orderRepositoryMock = new Mock<IOrderRepository>();

@@ -23,7 +23,7 @@ public class OrderRepository : IOrderRepository
 
     public async Task DeleteExpired(DateTime orderCutoffTime)
     {
-        string sql = "DELETE FROM orders WHERE ordered_at < @orderCutoffTime;";
+        string sql = "DELETE FROM orders WHERE ordered_at < @orderCutoffTime AND status_id = 1;";
 
         await _connection.QueryAsync(sql, new { orderCutoffTime = orderCutoffTime });
     }

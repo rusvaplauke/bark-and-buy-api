@@ -12,6 +12,10 @@ public class OrderService
     private readonly ISellerRepository _sellerRepository;
     private readonly IUserDataClient _userDataClient;
 
+    private const int DeliveredStatus = 3;
+    private const int CompletedStatus = 4;
+    private const int PendingLifetimeInHours = 2;
+
     public OrderService(IOrderRepository orderRepository, IStatusRepository statusRepository,
         ISellerRepository sellerRepository, IUserDataClient userDataClient)
     {
@@ -33,29 +37,27 @@ public class OrderService
         if (createdOrder is null)
             throw new ErrorCreatingOrderException();
 
-        return await EnrichOrder(createdOrder);
+        return await EnrichOrderAsync(createdOrder);
     }
 
     public async Task<Order> DeliverAsync(int id)
     {
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 3 }); //TODO: retrieve status value, not hardcode
+        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = DeliveredStatus }); 
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
 
-        return await EnrichOrder(updatedOrder);
+        return await EnrichOrderAsync(updatedOrder);
     }
 
     public async Task<Order> CompleteAsync(int id)
     {
-        //TODO: only allow to complete orders that were deivered
-
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 4 }); //TODO: retrieve status value, not hardcode
+        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = CompletedStatus }); 
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
 
-        return await EnrichOrder(updatedOrder);
+        return await EnrichOrderAsync(updatedOrder);
     }
 
     public async Task<List<Order>> GetAsync(int userId)
@@ -68,20 +70,20 @@ public class OrderService
 
         foreach (var order in result)
         {
-            enrichedOrders.Add(await EnrichOrder(order));
+            enrichedOrders.Add(await EnrichOrderAsync(order));
         }
 
         return enrichedOrders;
     }
 
-    internal async Task CleanUpExpired()
+    internal async Task CleanUpExpiredAsync()
     {
-        DateTime orderCutoffTime = DateTime.Now.AddHours(-2);
+        DateTime orderCutoffTime = DateTime.Now.AddHours(-PendingLifetimeInHours);
 
         await _orderRepository.DeleteExpired(orderCutoffTime);
     }
 
-    private async Task<Order> EnrichOrder(OrderEntity order)
+    private async Task<Order> EnrichOrderAsync(OrderEntity order)
     {
         int id = order.Id;
         string? status = await _statusRepository.GetStatusValueAsync(order.StatusId);
