@@ -12,11 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Clients\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 

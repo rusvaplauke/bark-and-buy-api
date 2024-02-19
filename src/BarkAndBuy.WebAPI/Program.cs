@@ -23,7 +23,7 @@ namespace BarkAndBuy.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Template API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BarkAndBuy API", Version = "v1" });
 
                 // Include the XML comments file
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -46,6 +46,7 @@ namespace BarkAndBuy.WebAPI
 
             app.UseAuthorization();
 
+            app.UseExceptionHandlingMiddleware();
 
             app.MapControllers();
 
