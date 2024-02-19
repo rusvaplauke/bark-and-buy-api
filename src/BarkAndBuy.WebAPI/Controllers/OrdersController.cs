@@ -45,7 +45,7 @@ public class OrdersController : ControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "Successfully changed order status to \"delivered\".")]
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error.")]
     [HttpPut("{id}/deliver")]
-    public async Task<IActionResult> Deliver(int id) 
+    public async Task<IActionResult> Deliver(int id)
     {
         return Ok(await _orderService.DeliverAsync(id));
     }
@@ -58,7 +58,7 @@ public class OrdersController : ControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "Successfully changed order status to \"completed\".")]
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "Internal server error.")]
     [HttpPut("{id}/complete")]
-    public async Task<IActionResult> Complete(int id) 
+    public async Task<IActionResult> Complete(int id)
     {
         return Ok(await _orderService.CompleteAsync(id));
     }

@@ -12,7 +12,8 @@ public class OrderService
     private readonly ISellerRepository _sellerRepository;
     private readonly IUserDataClient _userDataClient;
 
-    public OrderService(IOrderRepository orderRepository, IStatusRepository statusRepository, ISellerRepository sellerRepository, IUserDataClient userDataClient)
+    public OrderService(IOrderRepository orderRepository, IStatusRepository statusRepository,
+        ISellerRepository sellerRepository, IUserDataClient userDataClient)
     {
         _orderRepository = orderRepository;
         _statusRepository = statusRepository;
@@ -37,25 +38,22 @@ public class OrderService
 
     public async Task<Order> DeliverAsync(int id)
     {
-        //TODO: check if order exists 
-
         var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 3 }); //TODO: retrieve status value, not hardcode
 
         if (updatedOrder is null)
-            throw new ErrorUpdatingOrderException();
+            throw new OrderNotFoundException(id);
 
         return await EnrichOrder(updatedOrder);
     }
 
     public async Task<Order> CompleteAsync(int id)
     {
-        //TODO: check if order exists
         //TODO: only allow to complete orders that were deivered
 
         var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 4 }); //TODO: retrieve status value, not hardcode
 
         if (updatedOrder is null)
-            throw new ErrorUpdatingOrderException();
+            throw new OrderNotFoundException(id);
 
         return await EnrichOrder(updatedOrder);
     }
