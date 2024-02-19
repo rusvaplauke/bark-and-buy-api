@@ -14,14 +14,14 @@ public class OrderRepository : IOrderRepository
         _connection = connection;
     }
 
-    public async Task<OrderEntity?> CreateOrder(OrderEntity order)
+    public async Task<OrderEntity?> CreateOrderAsync(OrderEntity order)
     {
         string sql = "INSERT INTO orders (seller_id, user_id) VALUES (@SellerId, @UserId) RETURNING *;";
 
         return await _connection.QueryFirstOrDefaultAsync<OrderEntity>(sql, new { SellerId = order.SellerId, UserId = order.UserId });
     }
 
-    public async Task DeleteExpired(DateTime orderCutoffTime)
+    public async Task DeleteExpiredAsync(DateTime orderCutoffTime)
     {
         string sql = "DELETE FROM orders WHERE ordered_at < @orderCutoffTime AND status_id = 1;";
 
@@ -35,7 +35,7 @@ public class OrderRepository : IOrderRepository
         return await _connection.QueryAsync<OrderEntity>(sql, new { userId = userId });
     }
 
-    public async Task<OrderEntity?> UpdateOrder(OrderEntity order)
+    public async Task<OrderEntity?> UpdateOrderStatusAsync(OrderEntity order)
     {
         string updateSql = "UPDATE orders SET status_id = @StatusId WHERE id = @Id;";
         string selectSql = "SELECT * FROM orders WHERE id=@Id";

@@ -12,7 +12,7 @@ public class JsonPlaceholderClient : IUserDataClient
     {
         _httpClient = httpClient;
     }
-    public async Task<UserDataClientResult> GetUserAsync(int userId) //TODO: add this to DB
+    public async Task<UserDataClientResult> GetUserAsync(int userId)
     {
         var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users/{userId}");
         if (response.IsSuccessStatusCode)

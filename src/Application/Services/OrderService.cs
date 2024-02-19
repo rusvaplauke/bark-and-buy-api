@@ -32,7 +32,7 @@ public class OrderService
         if (await _sellerRepository.GetSellerNameAsync(order.sellerId) is null)
             throw new SellerNotFoundException(order.sellerId);
 
-        var createdOrder = await _orderRepository.CreateOrder(new OrderEntity { SellerId = order.sellerId, UserId = order.userId });
+        var createdOrder = await _orderRepository.CreateOrderAsync(new OrderEntity { SellerId = order.sellerId, UserId = order.userId });
 
         if (createdOrder is null)
             throw new ErrorCreatingOrderException();
@@ -42,7 +42,7 @@ public class OrderService
 
     public async Task<Order> DeliverAsync(int id)
     {
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = DeliveredStatus });
+        var updatedOrder = await _orderRepository.UpdateOrderStatusAsync(new OrderEntity { Id = id, StatusId = DeliveredStatus });
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
@@ -52,7 +52,7 @@ public class OrderService
 
     public async Task<Order> CompleteAsync(int id)
     {
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = CompletedStatus });
+        var updatedOrder = await _orderRepository.UpdateOrderStatusAsync(new OrderEntity { Id = id, StatusId = CompletedStatus });
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
@@ -80,7 +80,7 @@ public class OrderService
     {
         DateTime orderCutoffTime = DateTime.Now.AddHours(-PendingLifetimeInHours);
 
-        await _orderRepository.DeleteExpired(orderCutoffTime);
+        await _orderRepository.DeleteExpiredAsync(orderCutoffTime);
     }
 
     private async Task<Order> EnrichOrderAsync(OrderEntity order)

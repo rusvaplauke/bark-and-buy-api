@@ -65,14 +65,14 @@ public class OrderServiceTests
 
         _userDataClientMock.Setup(m => m.GetUserAsync(createOrder.userId)).ReturnsAsync(successfulResult);
         _sellerRepositoryMock.Setup(m => m.GetSellerNameAsync(createOrder.sellerId)).ReturnsAsync(sellerName);
-        _orderRepositoryMock.Setup(m => m.CreateOrder(It.IsAny<OrderEntity>())).ReturnsAsync((OrderEntity?)null);
+        _orderRepositoryMock.Setup(m => m.CreateOrderAsync(It.IsAny<OrderEntity>())).ReturnsAsync((OrderEntity?)null);
 
         // Act + Assert
         await _orderService.Invoking(f => f.CreateAsync(createOrder)).Should().ThrowAsync<ErrorCreatingOrderException>();
 
         _userDataClientMock.Verify(m => m.GetUserAsync(createOrder.userId), Times.Once);
         _sellerRepositoryMock.Verify(m => m.GetSellerNameAsync(createOrder.sellerId), Times.Once);
-        _orderRepositoryMock.Verify(m => m.CreateOrder(It.IsAny<OrderEntity>()), Times.Once);
+        _orderRepositoryMock.Verify(m => m.CreateOrderAsync(It.IsAny<OrderEntity>()), Times.Once);
     }
 
     [Theory]
@@ -88,7 +88,7 @@ public class OrderServiceTests
 
         _userDataClientMock.Setup(m => m.GetUserAsync(createOrder.userId)).ReturnsAsync(successfulResult);
         _sellerRepositoryMock.Setup(m => m.GetSellerNameAsync(createOrder.sellerId)).ReturnsAsync(sellerName);
-        _orderRepositoryMock.Setup(m => m.CreateOrder(It.IsAny<OrderEntity>())).ReturnsAsync(orderEntity);
+        _orderRepositoryMock.Setup(m => m.CreateOrderAsync(It.IsAny<OrderEntity>())).ReturnsAsync(orderEntity);
         _statusRepositoryMock.Setup(m => m.GetStatusValueAsync(orderEntity.StatusId)).ReturnsAsync(status);
 
         // Act
