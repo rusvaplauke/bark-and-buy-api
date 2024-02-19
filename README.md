@@ -14,7 +14,7 @@ The project is written in .NET8, using PostgreSQL for the database and Liquibase
 
 ## How to Run 🏃
 
-1. Ensure you have Docker and Docker Compose installed on your machine.
+1. Ensure you have Docker Desktop installed on your machine.
 2. Build and run the Docker containers:
 
     ```bash
