@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  apitemplate.webapi:
+    image: ${DOCKER_REGISTRY-}apitemplatewebapi
+    build:
+      context: .
+      dockerfile: src/APItemplate.WebAPI/Dockerfile
+    ports: 
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - "MySecrets__PostgreConnection=host=postgres;port=5432;database=mydatabase;username=myuser;password=mypassword"
+    depends_on:
+      - postgres 
+ 
+  postgres:
+    image: postgres
+    restart: always
+    ports: 
+      - "7777:5432" 
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydatabase
+
+  migrations:
+    image: liquibase/liquibase
+    volumes:
+      - ./src/DBmigrations:/liquibase/DBmigrations
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/mydatabase
+      - DATABASE_USERNAME=myuser
+      - DATABASE_PASSWORD=mypassword
+    command: 
+    - --changeLogFile=DBmigrations/changelog.yml
+    - --url=jdbc:postgresql://postgres:5432/mydatabase 
+    - --username=myuser 
+    - --password=mypassword 
+    - update
+    ports:
+    - "5055:5055"
+    depends_on:
+      - postgres 

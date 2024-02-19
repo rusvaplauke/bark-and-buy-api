@@ -1,0 +1,27 @@
+databaseChangeLog:
+    - changeSet:
+        id: 0001
+        author: j.jankauskaite
+        changes:
+        - sqlFile:
+            path: Migrations/001_create_tables.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+        rollback:
+        - sqlFile:
+            path: Migrations/001_create_tables_rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+    - changeSet:
+        id: 0002
+        author: j.jankauskaite
+        changes:
+        - sqlFile:
+            path: Migrations/003_seed_data.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+        rollback:
+        - sqlFile:
+            path: Migrations/004_seed_data_rollback.sql
+            relativeToChangelogFile: true
+            splitStatements: false
