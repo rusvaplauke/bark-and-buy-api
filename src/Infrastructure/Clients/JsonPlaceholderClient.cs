@@ -23,7 +23,7 @@ public class JsonPlaceholderClient : IUserDataClient
             {
                 User = user,
                 IsSuccessful = true,
-                ErrorMessage = "" //TODO: enrich with status code
+                ErrorMessage = ""
             };
         }
         else

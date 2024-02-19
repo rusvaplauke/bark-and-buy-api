@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarkAndBuy.WebAPI", "src\Ba
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarkAndBuy.UnitTests", "tests\BarkAndBuy.UnitTests\BarkAndBuy.UnitTests.csproj", "{6A2C3DDA-07F2-440B-BC16-9246DA348875}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{55F14273-507C-4573-90DE-72C92C786790} = {84CD38A0-EE31-4D0B-8268-412116AA890E}
 		{11F8E48C-A8EE-4E89-9984-361F2300AE82} = {84CD38A0-EE31-4D0B-8268-412116AA890E}
 		{4425B4E4-4342-40B2-914C-363F90F4BB68} = {84CD38A0-EE31-4D0B-8268-412116AA890E}
+		{6A2C3DDA-07F2-440B-BC16-9246DA348875} = {F28B264A-5792-42D3-937B-5C6795E90F14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E4D3302-C90A-469C-A76B-D9990B4200B8}

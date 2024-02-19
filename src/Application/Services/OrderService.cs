@@ -81,7 +81,7 @@ public class OrderService
         await _orderRepository.DeleteExpired(orderCutoffTime);
     }
 
-    private async Task<Order> EnrichOrder(OrderEntity order) 
+    private async Task<Order> EnrichOrder(OrderEntity order)
     {
         int id = order.Id;
         string? status = await _statusRepository.GetStatusValueAsync(order.StatusId);
@@ -97,7 +97,7 @@ public class OrderService
         var result = await _userDataClient.GetUserAsync(userId);
 
         if (!result.IsSuccessful)
-            throw new UserNotFoundException(userId);
+            throw new UserNotFoundException(userId, result.ErrorMessage!);
 
         return result.User.Name;
     }
