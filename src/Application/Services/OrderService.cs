@@ -81,7 +81,7 @@ public class OrderService
         await _orderRepository.DeleteExpired(orderCutoffTime);
     }
 
-    private async Task<Order> EnrichOrder(OrderEntity order) //TODO: deal with nulls
+    private async Task<Order> EnrichOrder(OrderEntity order) 
     {
         int id = order.Id;
         string? status = await _statusRepository.GetStatusValueAsync(order.StatusId);
