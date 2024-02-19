@@ -1,1 +1,3 @@
-﻿
+﻿DROP TABLE orders CASCADE;
+DROP TABLE orderstatuses CASCADE;
+DROP TABLE sellers CASCADE;
