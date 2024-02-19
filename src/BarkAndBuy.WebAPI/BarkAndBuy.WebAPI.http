@@ -1,0 +1,24 @@
+@rootUri = http://localhost:5041
+
+POST {{rootUri}}/orders/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "sellerId": 1,
+  "userId": 5
+}
+
+###
+
+GET {{rootUri}}/orders?userId=2
+Accept: application/json
+
+###
+
+PUT {{rootUri}}/orders/3/complete
+Accept: application/json
+
+###
+PUT {{rootUri}}/orders/3/deliver
+Accept: application/json
