@@ -1,14 +1,21 @@
 
-using BarkAndBuy.WebAPI.Middlewares;
 using Application;
+using BarkAndBuy.WebAPI.Middlewares;
 using Infrastructure;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 namespace BarkAndBuy.WebAPI
 {
+    /// <summary>
+    /// The main entry point of the application.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The entry point of the application.
+        /// </summary>
+        /// <param name="args">The command-line arguments passed to the application.</param>
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);

@@ -1,8 +1,12 @@
-﻿using System.Net;
+﻿using Domain.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace BarkAndBuy.WebAPI.Middlewares;
 
+///<summary>
+///Middleware for global exception handling
+///</summary>
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
@@ -31,6 +35,9 @@ public class ExceptionHandlingMiddleware
 
             response.StatusCode = ex switch
             {
+                UserNotFoundException => (int)HttpStatusCode.NotFound,
+                ErrorCreatingOrderException => (int)HttpStatusCode.InternalServerError,
+                SellerNotFoundException => (int)HttpStatusCode.NotFound,
                 _ => (int)HttpStatusCode.InternalServerError
             };
 

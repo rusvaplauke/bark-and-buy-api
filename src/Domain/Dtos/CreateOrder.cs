@@ -1,9 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Domain.Dtos;
 
-namespace Domain.Dtos;
-
-public record CreateOrder(int sellerId, int userId); 
+public record CreateOrder(int sellerId, int userId);
