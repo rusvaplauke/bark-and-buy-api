@@ -9,7 +9,7 @@ The project is written in .NET8, using PostgreSQL for the database and Liquibase
 
 - An order is created when a user wants to buy an item on the marketplace.
 - A seller can deliver the item and mark the order as completed.
-- Orders that are not paid within 2 hours of creation are automatically deleted from the system.
+- Orders that are not paid within 2 hours of creation are automatically deleted from the system. The cleanup service runs every 2 minutes.
 - A user can retrieve all of their orders.
 
 ## How to Run 🏃
