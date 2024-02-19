@@ -2,7 +2,6 @@
 using Domain.Entities;
 using Domain.Interfaces;
 using System.Data;
-using System.Data.Common;
 
 namespace Infrastructure.Repositories;
 
@@ -34,7 +33,7 @@ public class OrderRepository : IOrderRepository
         string updateSql = "UPDATE orders SET status_id = @StatusId WHERE id = @Id;";
         string selectSql = "SELECT * FROM orders WHERE id=@Id";
 
-        await _connection.QueryAsync(updateSql, new { StatusId = order.StatusId, Id = order.Id});
-        return await _connection.QueryFirstOrDefaultAsync<OrderEntity>(selectSql, new { Id = order.Id});
+        await _connection.QueryAsync(updateSql, new { StatusId = order.StatusId, Id = order.Id });
+        return await _connection.QueryFirstOrDefaultAsync<OrderEntity>(selectSql, new { Id = order.Id });
     }
 }

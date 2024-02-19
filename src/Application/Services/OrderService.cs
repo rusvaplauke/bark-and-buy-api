@@ -39,7 +39,7 @@ public class OrderService
     {
         //TODO: check if order exists 
 
-        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 3}); //TODO: retrieve status value, not hardcode
+        var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 3 }); //TODO: retrieve status value, not hardcode
 
         if (updatedOrder is null)
             throw new ErrorUpdatingOrderException();
@@ -51,7 +51,7 @@ public class OrderService
     {
         //TODO: check if order exists
         //TODO: only allow to complete orders that were deivered
-        
+
         var updatedOrder = await _orderRepository.UpdateOrder(new OrderEntity { Id = id, StatusId = 4 }); //TODO: retrieve status value, not hardcode
 
         if (updatedOrder is null)
