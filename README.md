@@ -41,6 +41,7 @@ The project is written in .NET8, using PostgreSQL for the database and Liquibase
 ## Limitations 🧠
 - The assumed model "1 seller - 1 item" / "1 item per order" is not flexible for greater online marketplace needs. However, the model is easily extendible to account for more complex structures.
 - Integration tests where skipped due to limited resources.
+- Users should be cached in database in order to reduce the number of API calls and minimize dependency on external API.
 
 ## Documentation & manual testing 🌻
 
