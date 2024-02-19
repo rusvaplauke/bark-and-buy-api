@@ -80,10 +80,7 @@ public class OrderService
     {
         DateTime orderCutoffTime = DateTime.Now.AddHours(-2);
 
-        // TODO: determine order time until which orders need to be deleted
-        // TODO: call Delete with this time
-
-        // await _orderRepository.DeleteExpired(orderCutoffTime);
+        await _orderRepository.DeleteExpired(orderCutoffTime);
     }
 
     private async Task<Order> EnrichOrder(OrderEntity order) //TODO: deal with nulls

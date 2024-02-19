@@ -21,6 +21,13 @@ public class OrderRepository : IOrderRepository
         return await _connection.QueryFirstOrDefaultAsync<OrderEntity>(sql, new { SellerId = order.SellerId, UserId = order.UserId });
     }
 
+    public async Task DeleteExpired(DateTime orderCutoffTime)
+    {
+        string sql = "DELETE FROM orders WHERE ordered_at < @orderCutoffTime;"; 
+
+        await _connection.QueryAsync(sql, new { orderCutoffTime = orderCutoffTime });
+    }
+
     public async Task<IEnumerable<OrderEntity>> GetOrdersByUserAsync(int userId)
     {
         string sql = "SELECT id, status_id, seller_id, user_id, ordered_at FROM orders WHERE user_id = @userId;";
