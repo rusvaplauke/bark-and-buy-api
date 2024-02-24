@@ -1,4 +1,5 @@
 ﻿using Application.Services;
+using Domain.Constants;
 using Domain.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -49,7 +50,7 @@ public class OrdersController : ControllerBase
     [HttpPut("{id}/deliver")]
     public async Task<IActionResult> Deliver(int id)
     {
-        return Ok(await _orderService.DeliverAsync(id));
+        return Ok(await _orderService.UpdateOrderStatusAsync(id, StatusIds.Delivered));
     }
 
     ///<summary>
@@ -63,7 +64,7 @@ public class OrdersController : ControllerBase
     [HttpPut("{id}/complete")]
     public async Task<IActionResult> Complete(int id)
     {
-        return Ok(await _orderService.CompleteAsync(id));
+        return Ok(await _orderService.UpdateOrderStatusAsync(id, StatusIds.Completed));
     }
 
     ///<summary>

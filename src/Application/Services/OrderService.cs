@@ -1,4 +1,5 @@
-﻿using Domain.Dtos;
+﻿using Domain.Constants;
+using Domain.Dtos;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Interfaces;
@@ -12,8 +13,6 @@ public class OrderService
     private readonly ISellerRepository _sellerRepository;
     private readonly IUserDataClient _userDataClient;
 
-    private const int DeliveredStatus = 3;
-    private const int CompletedStatus = 4;
     private const int PendingLifetimeInHours = 2;
 
     public OrderService(IOrderRepository orderRepository, IStatusRepository statusRepository,
@@ -40,19 +39,9 @@ public class OrderService
         return await EnrichOrderAsync(createdOrder);
     }
 
-    public async Task<Order> DeliverAsync(int id)
+    public async Task<Order> UpdateOrderStatusAsync(int id, int statusId)
     {
-        var updatedOrder = await _orderRepository.UpdateOrderStatusAsync(new OrderEntity { Id = id, StatusId = DeliveredStatus });
-
-        if (updatedOrder is null)
-            throw new OrderNotFoundException(id);
-
-        return await EnrichOrderAsync(updatedOrder);
-    }
-
-    public async Task<Order> CompleteAsync(int id)
-    {
-        var updatedOrder = await _orderRepository.UpdateOrderStatusAsync(new OrderEntity { Id = id, StatusId = CompletedStatus });
+        var updatedOrder = await _orderRepository.UpdateOrderStatusAsync(new OrderEntity { Id = id, StatusId = statusId });
 
         if (updatedOrder is null)
             throw new OrderNotFoundException(id);
