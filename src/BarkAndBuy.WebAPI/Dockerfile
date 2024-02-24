@@ -13,7 +13,7 @@ COPY ["src/BarkAndBuy.WebAPI/BarkAndBuy.WebAPI.csproj", "src/BarkAndBuy.WebAPI/"
 COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
 COPY ["src/Application/Application.csproj", "src/Application/"]
 COPY ["src/Domain/Domain.csproj", "src/Domain/"]
-RUN dotnet restore "./src/BarkAndBuy.WebAPI/./BarkAndBuy.WebAPI.csproj"
+RUN dotnet restore "./src/BarkAndBuy.WebAPI/BarkAndBuy.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/src/BarkAndBuy.WebAPI"
 RUN dotnet build "./BarkAndBuy.WebAPI.csproj" -c $BUILD_CONFIGURATION -o /app/build

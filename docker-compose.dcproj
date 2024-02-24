@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>7c0a3229-b253-4b96-81d4-a55ef7aa1b14</ProjectGuid>
+    <ProjectGuid>ab157021-5243-4a42-a0c4-9ed40225c635</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>barkandbuy.webapi</DockerServiceName>

@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBmigrations", "src\DBmigra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarkAndBuy.WebAPI", "src\BarkAndBuy.WebAPI\BarkAndBuy.WebAPI.csproj", "{4425B4E4-4342-40B2-914C-363F90F4BB68}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarkAndBuy.UnitTests", "tests\BarkAndBuy.UnitTests\BarkAndBuy.UnitTests.csproj", "{6A2C3DDA-07F2-440B-BC16-9246DA348875}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarkAndBuy.UnitTests", "tests\BarkAndBuy.UnitTests\BarkAndBuy.UnitTests.csproj", "{6A2C3DDA-07F2-440B-BC16-9246DA348875}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AB157021-5243-4A42-A0C4-9ED40225C635}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,14 +53,14 @@ Global
 		{4425B4E4-4342-40B2-914C-363F90F4BB68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4425B4E4-4342-40B2-914C-363F90F4BB68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4425B4E4-4342-40B2-914C-363F90F4BB68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C0A3229-B253-4B96-81D4-A55EF7AA1B14}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A2C3DDA-07F2-440B-BC16-9246DA348875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB157021-5243-4A42-A0C4-9ED40225C635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB157021-5243-4A42-A0C4-9ED40225C635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB157021-5243-4A42-A0C4-9ED40225C635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB157021-5243-4A42-A0C4-9ED40225C635}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
