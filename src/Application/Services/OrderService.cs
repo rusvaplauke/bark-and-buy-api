@@ -3,6 +3,7 @@ using Domain.Dtos;
 using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace Application.Services;
 
@@ -13,15 +14,20 @@ public class OrderService
     private readonly ISellerRepository _sellerRepository;
     private readonly IUserDataClient _userDataClient;
 
-    private const int PendingLifetimeInHours = 2;
+    private int pendingLifetimeInHours;
 
     public OrderService(IOrderRepository orderRepository, IStatusRepository statusRepository,
-        ISellerRepository sellerRepository, IUserDataClient userDataClient)
+        ISellerRepository sellerRepository, IUserDataClient userDataClient, IConfiguration configuration)
     {
         _orderRepository = orderRepository;
         _statusRepository = statusRepository;
         _sellerRepository = sellerRepository;
         _userDataClient = userDataClient;
+
+        if (!int.TryParse(configuration["PeriodicCleanup:PendingOrderLifetimeInHours"], out pendingLifetimeInHours))
+        {
+            throw new ArgumentNullException("PeriodicCleanup:PendingOrderLifetimeInHours");
+        }
     }
 
     public async Task<Order> CreateAsync(CreateOrder order)
@@ -67,7 +73,7 @@ public class OrderService
 
     internal async Task CleanUpExpiredAsync()
     {
-        DateTime orderCutoffTime = DateTime.Now.AddHours(-PendingLifetimeInHours);
+        DateTime orderCutoffTime = DateTime.Now.AddHours(-pendingLifetimeInHours);
 
         await _orderRepository.DeleteExpiredAsync(orderCutoffTime);
     }

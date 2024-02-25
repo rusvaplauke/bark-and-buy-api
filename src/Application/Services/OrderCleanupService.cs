@@ -15,9 +15,9 @@ public class OrderCleanupService : BackgroundService
         _orderServiceScopeFactory = serviceScopeFactory;
 
         double cleanupPeriod;
-        if (!double.TryParse(configuration["PeriodicCleanup"], out cleanupPeriod))
+        if (!double.TryParse(configuration["PeriodicCleanup:CleanupPeriodInMinutes"], out cleanupPeriod))
         {
-            throw new ArgumentNullException("PeriodicCleanup");
+            throw new ArgumentNullException("PeriodicCleanup:CleanupPeriodInMinutes");
         }
         _period = TimeSpan.FromMinutes(cleanupPeriod);
     }
