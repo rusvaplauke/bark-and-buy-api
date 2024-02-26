@@ -5,6 +5,7 @@ using Domain.Entities;
 using Domain.Exceptions;
 using Domain.Interfaces;
 using FluentAssertions;
+using Microsoft.Extensions.Configuration;
 using Moq;
 
 namespace BarkAndBuy.UnitTests.Services;
@@ -15,6 +16,7 @@ public class OrderServiceTests
     private readonly Mock<IStatusRepository> _statusRepositoryMock;
     private readonly Mock<IOrderRepository> _orderRepositoryMock;
     private readonly Mock<IUserDataClient> _userDataClientMock;
+    private readonly Mock<IConfiguration> _configuration;
     private readonly OrderService _orderService;
 
     public OrderServiceTests()
@@ -23,10 +25,12 @@ public class OrderServiceTests
         _statusRepositoryMock = new Mock<IStatusRepository>();
         _orderRepositoryMock = new Mock<IOrderRepository>();
         _userDataClientMock = new Mock<IUserDataClient>();
+        _configuration = new Mock<IConfiguration>();
         _orderService = new OrderService(_orderRepositoryMock.Object,
                                          _statusRepositoryMock.Object,
                                          _sellerRepositoryMock.Object,
-                                         _userDataClientMock.Object);
+                                         _userDataClientMock.Object,
+                                         _configuration.Object);
     }
     [Theory]
     [AutoData]
