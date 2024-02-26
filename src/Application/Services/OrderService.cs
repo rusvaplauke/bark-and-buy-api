@@ -13,8 +13,7 @@ public class OrderService
     private readonly IStatusRepository _statusRepository;
     private readonly ISellerRepository _sellerRepository;
     private readonly IUserDataClient _userDataClient;
-
-    private int pendingLifetimeInHours;
+    private readonly IConfiguration _configuration;
 
     public OrderService(IOrderRepository orderRepository, IStatusRepository statusRepository,
         ISellerRepository sellerRepository, IUserDataClient userDataClient, IConfiguration configuration)
@@ -23,11 +22,7 @@ public class OrderService
         _statusRepository = statusRepository;
         _sellerRepository = sellerRepository;
         _userDataClient = userDataClient;
-
-        if (!int.TryParse(configuration["PeriodicCleanup:PendingOrderLifetimeInHours"], out pendingLifetimeInHours))
-        {
-            throw new ArgumentNullException("PeriodicCleanup:PendingOrderLifetimeInHours");
-        }
+        _configuration = configuration;
     }
 
     public async Task<Order> CreateAsync(CreateOrder order)
@@ -73,6 +68,11 @@ public class OrderService
 
     internal async Task CleanUpExpiredAsync()
     {
+        if (!int.TryParse(_configuration["PeriodicCleanup:PendingOrderLifetimeInHours"], out int pendingLifetimeInHours))
+        {
+            throw new ArgumentNullException("PeriodicCleanup:PendingOrderLifetimeInHours");
+        }
+
         DateTime orderCutoffTime = DateTime.Now.AddHours(-pendingLifetimeInHours);
 
         await _orderRepository.DeleteExpiredAsync(orderCutoffTime);
