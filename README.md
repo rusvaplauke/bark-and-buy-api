@@ -39,10 +39,11 @@ The project is written in .NET8, using PostgreSQL for the database and Liquibase
 ## Limitations 🧠
 - Only CreateAsync method was covered with unit tests due to limited time resources.
 - Integration tests where skipped due to limited time resources.
-- Some values were hardcoded for faster implementation (status ids and values, pending order deletion period). They could be retrieved dynamically in order to assure easier maintenance. 
+- ~~Some values were hardcoded for faster implementation (status ids and values, pending order deletion period). They could be retrieved dynamically in order to assure easier maintenance.~~ FIXED! 
 - The assumed model "1 seller - 1 item" / "1 item per order" is not flexible for general online marketplace needs. Luckily, the current model is easily extendible to account for more complex structures.
 - Users could be cached in database in order to reduce the number of API calls and minimize dependency on external API.
 - Additional checks could be implemented to ensure that order status changes are logical and to prevent fraud (i.e., pending -> paid -> delivered -> completed).
+- Client error handling needs to be improved (it currently classifies all errors as "User not found").
 
 ## Documentation & manual testing 🌻
 
