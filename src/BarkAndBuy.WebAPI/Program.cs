@@ -19,12 +19,16 @@ namespace BarkAndBuy.WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.WebHost.UseKestrel().UseUrls("http://+:8080"); 
 
             // Add services to the container.
 
             builder.Services.AddControllers();
             builder.Services.AddApplication();
-            builder.Services.AddInfrastructure(builder.Configuration["PostgreConnection"]);
+            string connectionString = builder.Configuration["MySecrets__PostgreConnection"] 
+                                      ?? builder.Configuration.GetConnectionString("PostgreConnection");
+            
+            builder.Services.AddInfrastructure(connectionString);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
