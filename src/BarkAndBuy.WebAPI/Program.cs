@@ -4,6 +4,7 @@ using BarkAndBuy.WebAPI.Middlewares;
 using Infrastructure;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace BarkAndBuy.WebAPI
 {
@@ -19,7 +20,7 @@ namespace BarkAndBuy.WebAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.WebHost.UseKestrel().UseUrls("http://+:8080"); 
+           // builder.WebHost.UseKestrel().UseUrls("http://+:8080"); 
 
             // Add services to the container.
 
@@ -28,7 +29,9 @@ namespace BarkAndBuy.WebAPI
             string connectionString = builder.Configuration["MySecrets__PostgreConnection"] 
                                       ?? builder.Configuration.GetConnectionString("PostgreConnection");
             
-            builder.Services.AddInfrastructure(connectionString);
+            var connectionStringForEFC = builder.Configuration.GetConnectionString("Postgres");
+            
+            builder.Services.AddInfrastructure(connectionString, connectionStringForEFC);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -43,6 +46,20 @@ namespace BarkAndBuy.WebAPI
             });
 
             var app = builder.Build();
+            
+            using (var scope = app.Services.CreateScope()) // butu graziau atskira metoda ApplyMigrations. Gal cia butu graziau i AddInfrastructure? 
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var dbContext = services.GetRequiredService<MyDbContext>();
+                    dbContext.Database.Migrate();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while migrating the database: {ex.Message}");
+                }
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
